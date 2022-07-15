@@ -1,38 +1,420 @@
 .App {
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: #d8d0bb;
 }
 
-.App-logo {
-  height: 40vmin;
+.App .users-list {
+  background-color: #282c34;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  color: white;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  animation: fade-in 0.5s ease-in-out;
+  transition: opacity 0.5s ease-in-out;
+  z-index: 1000;
+}
+
+.App .users-list.hidden {
+  opacity: 0;
   pointer-events: none;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.App .users-list .title {
+  font-size: 30px;
+  margin: 10px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.App .users-list .user-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #8a8a8a;
+  height: 60px;
+  width: 80%;
+  margin: 10px 0;
+  font-size: 20px;
+  transition: transform 0.5s ease-in-out;
+}
+
+.App .users-list .user-container:active,
+.App .users-list .user-container:hover {
+  transform: scale(1.05);
+}
+
+.App .meal-parts-container {
+  color: #777777;
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  align-items: center;
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  transition: opacity 0.5s ease-in-out;
+  margin-top: 87px;
+}
+
+.App .nav-bar {
+  width: 100%;
+  position: fixed;
+  right: 0;
+  left: 0;
+  top: 0;
+  border-bottom: 1px solid #ccc;
+  z-index: 10;
+}
+
+.App .nav-bar .logo-container {
+  width: 100%;
+  height: 60px;
+  background-color: #4b688d;
+  font-family: 'Indie Flower', cursive;
   color: white;
+  font-size: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.App-link {
-  color: #61dafb;
+.App .nav-bar .user-details-container {
+  width: 100%;
+  height: 36px;
+  background-color: white;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  align-items: center;
+  color: #777777;
+  font-size: 18px;
+  box-sizing: border-box;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.App .nav-bar .user-details-container {
+}
+
+.App .meal-parts-container.visible {
+  height: auto;
+  opacity: 1;
+}
+
+.App .meal-parts-container .meal-part-item {
+  width: 90%;
+  margin: 30px;
+  background: white;
+  color: #666666;
+}
+
+.header {
+  font-size: 20px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 10px 20px;
+  color: #666666;
+  background-color: rgba(0, 0, 0, 0.03);
+}
+
+.header .cancel-button {
+  position: absolute;
+  left: 15px;
+}
+
+.button {
+  color: #337ab7;
+}
+
+.App .meal-parts-container .meal-part-item .content {
+  min-height: 150px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.App .meal-parts-container .meal-part-item .add-new-dish-button {
+  font-size: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.02);
+  height: 40px;
+}
+
+.App .meal-parts-container .meal-part-item .add-new-dish-button:hover,
+.App .meal-parts-container .meal-part-item .add-new-dish-button:active {
+  animation: touch-feedback 1s ease-in-out;
+}
+
+.App .meal-parts-container .meal-part-item .dish-container {
+  width: 95%;
+  margin: 10px 0;
+}
+
+.App .meal-parts-container .meal-part-item .dish-container .dish-post {
+  width: 100%;
+  height: 300px;
+  background-size: cover;
+  background-position: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  position: relative;
+}
+
+.App
+  .meal-parts-container
+  .meal-part-item
+  .dish-container
+  .users-rating-container {
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+}
+
+.App .meal-parts-container .meal-part-item .dish-container .user-rating {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.App
+  .meal-parts-container
+  .meal-part-item
+  .dish-container
+  .user-rating
+  .user-name {
+  width: 40px;
+  text-align: right;
+}
+
+.App
+  .meal-parts-container
+  .meal-part-item
+  .dish-container
+  .user-rating
+  .separator {
+  width: 20px;
+}
+
+.App
+  .meal-parts-container
+  .meal-part-item
+  .dish-container
+  .user-rating
+  .rating {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 27px;
+}
+
+.App
+  .meal-parts-container
+  .meal-part-item
+  .dish-container
+  .user-rating
+  .rating
+  .star {
+  width: 14px;
+  height: 14px;
+  background-image: url('/public/rating.png');
+  background-size: 100%;
+}
+
+.App .meal-parts-container .meal-part-item .dish-container .didnt-rate-flag {
+  background-color: #ff1328;
+  position: absolute;
+  top: 10px;
+  left: 0;
+  color: white;
+  padding: 5px;
+  border-radius: 0px 15px 15px 0px;
+}
+
+.App .meal-parts-container .meal-part-item .dish-container .details {
+  height: 50px;
+  background-color: rgba(0, 0, 0, 0.6);
+  color: white;
+  display: flex;
+  padding: 0px 10px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.App
+  .meal-parts-container
+  .meal-part-item
+  .dish-container
+  .details
+  .rating-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 50px;
+}
+
+.App .meal-parts-container .meal-part-item .dish-container .details .star {
+  background-image: url('/public/rating.png');
+  background-size: 100%;
+  height: 20px;
+  width: 20px;
+}
+
+.App .meal-parts-container .meal-part-item .dish-container .details .rating {
+  font-size: 16px;
+  margin-top: 2px;
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #d8d0bb;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+  pointer-events: none;
+  z-index: 100;
+}
+
+.modal.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.modal .content {
+  position: absolute;
+  top: 30px;
+  left: 30px;
+  right: 30px;
+  bottom: 30px;
+  background: white;
+}
+
+.add-new-dish-modal .content .error-message {
+  color: #ff6573;
+  margin: 10px;
+}
+
+.add-new-dish-modal .content .meal-name-input {
+  margin: 20px 0;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  width: 85%;
+  height: 40px;
+  font-size: 20px;
+  padding: 0 10px;
+  font-family: 'Rubik', sans-serif;
+}
+
+.add-new-dish-modal .content .image-placeholder {
+  height: 250px;
+  width: 100%;
+  margin: auto;
+  margin-top: 10px;
+  background: rgba(0, 0, 0, 0.1);
+  background-size: cover;
+  background-position: 50%;
+  background-repeat: no-repeat;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 30px;
+}
+
+.add-new-dish-modal .content .submit-button {
+  margin-top: 50px;
+  font-size: 30px;
+}
+
+.add-new-dish-modal .content .input-file {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}
+
+.rate-dish-modal .dish-name {
+  font-size: 20px;
+  color: #666666;
+  margin: 10px 0;
+}
+
+.rate-dish-modal .dish-image {
+  width: 100%;
+  height: 300px;
+  background-size: cover;
+  background-position: 50%;
+}
+
+.rate-dish-modal .rating-container .title {
+  font-size: 20px;
+  color: #666666;
+  margin-top: 20px;
+}
+
+.rate-dish-modal .rating-container .stars-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 20px;
+  direction: ltr;
+}
+
+.rate-dish-modal .rating-container .stars-container .star {
+  background-image: url('/public/rating.png');
+  background-size: 100%;
+  height: 40px;
+  width: 40px;
+  filter: grayscale(100%);
+  transition: filter 0.2s ease-in-out;
+}
+
+.rate-dish-modal .rating-container .stars-container .star.selected {
+  filter: grayscale(0%);
+}
+
+.rate-dish-modal .submit-button {
+  margin-top: 30px;
+  font-size: 30px;
+  color: #337ab7;
+}
+
+.rate-dish-modal .submit-button.disabled {
+  color: #ccc;
+}
+
+@keyframes fade-in {
+  0% {
+    transform: scale(0.95);
+    opacity: 0;
   }
-  to {
-    transform: rotate(360deg);
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes touch-feedback {
+  0% {
+    background-color: rgba(0, 0, 0, 0.02);
+  }
+  50% {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+  100% {
+    background-color: rgba(0, 0, 0, 0.02);
   }
 }
