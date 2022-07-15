@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/ta-im-for-lior-and-itay/static/css/main.35fa7bdb.css",
+    "main.css": "/ta-im-for-lior-and-itay/static/css/main.d30f6e81.css",
     "main.js": "/ta-im-for-lior-and-itay/static/js/main.865bba81.js",
     "static/js/787.f5dcacb6.chunk.js": "/ta-im-for-lior-and-itay/static/js/787.f5dcacb6.chunk.js",
     "static/media/rating.png": "/ta-im-for-lior-and-itay/static/media/rating.8fc2fb419cd00cf9a67d.png",
     "index.html": "/ta-im-for-lior-and-itay/index.html",
-    "main.35fa7bdb.css.map": "/ta-im-for-lior-and-itay/static/css/main.35fa7bdb.css.map",
+    "main.d30f6e81.css.map": "/ta-im-for-lior-and-itay/static/css/main.d30f6e81.css.map",
     "main.865bba81.js.map": "/ta-im-for-lior-and-itay/static/js/main.865bba81.js.map",
     "787.f5dcacb6.chunk.js.map": "/ta-im-for-lior-and-itay/static/js/787.f5dcacb6.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.35fa7bdb.css",
+    "static/css/main.d30f6e81.css",
     "static/js/main.865bba81.js"
   ]
 }
