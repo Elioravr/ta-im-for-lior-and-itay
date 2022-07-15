@@ -215,7 +215,16 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 27px;
+}
+
+.App
+  .meal-parts-container
+  .meal-part-item
+  .dish-container
+  .user-rating
+  .rating
+  .comment {
+  margin-right: 8px;
 }
 
 .App
@@ -229,6 +238,7 @@
   height: 14px;
   background-image: url('/public/rating.png');
   background-size: 100%;
+  margin-right: 3px;
 }
 
 .App .meal-parts-container .meal-part-item .dish-container .didnt-rate-flag {
@@ -308,6 +318,16 @@
 }
 
 .add-new-dish-modal .content .meal-name-input {
+  margin: 20px 0;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  width: 85%;
+  height: 40px;
+  font-size: 20px;
+  padding: 0 10px;
+  font-family: 'Rubik', sans-serif;
+}
+
+.input {
   margin: 20px 0;
   border: 1px solid rgba(0, 0, 0, 0.1);
   width: 85%;

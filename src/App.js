@@ -9,13 +9,15 @@ import 'firebase/database';
 import 'firebase/storage';
 
 const firebaseConfig = {
-  apiKey: 'AIzaSyCOghUXuxDT-VPpoF3btImP3ygkrMWXWbA',
-  authDomain: 'ta-im-b0d0b.firebaseapp.com',
-  databaseURL: 'https://ta-im-b0d0b.firebaseio.com',
-  projectId: 'ta-im-b0d0b',
-  storageBucket: 'ta-im-b0d0b.appspot.com',
-  messagingSenderId: '130432784630',
-  appId: '1:130432784630:web:a0644a837bd2510d',
+  apiKey: 'AIzaSyBdSL17rZ4MtYAfZu6GUIW8qINtrvpk0kc',
+  authDomain: 'ta-im-for-lior-and-itay-aec74.firebaseapp.com',
+  databaseURL:
+    'https://ta-im-for-lior-and-itay-aec74-default-rtdb.firebaseio.com/',
+  projectId: 'ta-im-for-lior-and-itay-aec74',
+  storageBucket: 'ta-im-for-lior-and-itay-aec74.appspot.com',
+  messagingSenderId: '801714873293',
+  appId: '1:801714873293:web:beba2eee472d1d8b47da84',
+  measurementId: 'G-MXLRVLJ6Q7',
 };
 
 firebase.initializeApp(firebaseConfig);
@@ -28,30 +30,32 @@ const imagesFolder = storageRef.child('images');
 
 const users = {
   'user-1': {
-    name: 'בתיה',
+    name: 'אירית',
     image: '',
   },
   'user-2': {
-    name: 'אודי',
+    name: 'אילנית',
     image: '',
   },
   'user-3': {
-    name: 'גילה',
+    name: 'ארז',
     image: '',
   },
   'user-4': {
-    name: 'נחומי',
+    name: 'אביב',
     image: '',
   },
   'user-5': {
-    name: 'יובל',
+    name: 'ליאור',
     image: '',
   },
   'user-6': {
-    name: 'אליאור',
+    name: 'איתי',
     image: '',
   },
 };
+
+const COMMENT_MAX_LENGTH = 20;
 
 class App extends Component {
   state = {
@@ -251,6 +255,8 @@ const MealPartItem = ({
   addNewDish,
   createRateDishCallback,
 }) => {
+  // console.log('dish', dish);
+  // console.log('dish.rating[userId].rating', dish.rating[userId].rating);
   return (
     <div className='meal-part-item'>
       <div className='header'>{mealPart.name}</div>
@@ -260,7 +266,9 @@ const MealPartItem = ({
             const dish = mealPart.dishes[dishId];
             let rating = dish.rating
               ? mean(
-                  Object.keys(dish.rating).map((userId) => dish.rating[userId])
+                  Object.keys(dish.rating).map(
+                    (userId) => dish.rating[userId].ratingNumber
+                  )
                 )
               : 0;
             const didUserRatedThisDish = dish.rating
@@ -291,13 +299,17 @@ const MealPartItem = ({
                 {dish.rating && (
                   <div className='users-rating-container'>
                     {Object.keys(dish.rating).map((userId) => {
+                      console.log('dish', dish);
                       return (
                         <div key={`${userId}-rating`} className='user-rating'>
                           <div className='user-name'>{users[userId].name}</div>
                           <div className='separator'>-</div>
                           <div className='rating'>
-                            <span>{dish.rating[userId]}</span>
+                            <span>{dish.rating[userId].ratingNumber}</span>
                             <div className='star'></div>
+                            <span className='comment'>
+                              {dish.rating[userId].comment}
+                            </span>
                           </div>
                         </div>
                       );
@@ -408,7 +420,7 @@ class AddNewDishModal extends Component {
             type='text'
             placeholder='שם המנה'
             value={name}
-            className='meal-name-input'
+            className='input'
             onChange={this.handleNameChange}
           />
 
@@ -444,6 +456,7 @@ class AddNewDishModal extends Component {
 class RateDishModal extends Component {
   state = {
     rating: 0,
+    comment: '',
   };
 
   closeModal = () => {
@@ -462,15 +475,26 @@ class RateDishModal extends Component {
 
   setRating = () => {
     const { setRating } = this.props;
-    const { rating } = this.state;
+    const { rating, comment } = this.state;
 
     if (rating !== 0) {
-      this.setState({ rating: 0 });
-      setRating(rating);
+      this.setState({ rating: 0, comment: '' });
+      setRating({ ratingNumber: rating, comment });
     }
   };
 
+  handleCommentsChange = (e) => {
+    const commentContent = e.target.value;
+
+    if (commentContent.length > COMMENT_MAX_LENGTH) {
+      return;
+    }
+
+    this.setState({ comment: commentContent });
+  };
+
   render() {
+    console.log('this.state.comment', this.state.comment);
     const { isVisible, dishToRate } = this.props;
     const { rating } = this.state;
 
@@ -516,6 +540,14 @@ class RateDishModal extends Component {
               ></div>
             </div>
           </div>
+
+          <input
+            type='text'
+            placeholder={`הערות (עד ${COMMENT_MAX_LENGTH} תווים)`}
+            className='input'
+            value={this.state.comment}
+            onChange={this.handleCommentsChange}
+          />
 
           <div
             className={`submit-button ${rating === 0 ? 'disabled' : ''}`}
